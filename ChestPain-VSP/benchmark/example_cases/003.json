@@ -1,0 +1,84 @@
+{
+  "case_id": "EXAMPLE_MSK_003",
+  "category": "Musculoskeletal",
+  "diagnosis_group": "Benign chest wall pain after red-flag screening",
+  "risk_level": "low_after_screening",
+  "task_type": "interactive_chest_pain_reasoning",
+  "specialty": "Primary Care / Emergency Medicine",
+  "caseTitle": "Synthetic chest wall pain case",
+  "caseDescription": "A synthetic de-identified case for demonstrating benign alternative clues.",
+  "minimum_safe_actions": [
+    "ask_chest_pain_features",
+    "screen_acs_red_flags",
+    "screen_pe_ad_red_flags",
+    "identify_reproducible_chest_wall_tenderness",
+    "provide_return_precautions"
+  ],
+  "patientProfile": {
+    "name": "Example Patient 003",
+    "age_value": 35,
+    "age_unit": "years",
+    "gender": "male",
+    "chief_complaint": "Left chest pain for three days.",
+    "present_illness_history": "Pain began after moving heavy boxes and is worse when pressing the area or twisting.",
+    "past_medical_history": "No chronic medical illness.",
+    "personal_history": "Non-smoker.",
+    "family_history": "No premature coronary disease.",
+    "idea": "I think I pulled a muscle.",
+    "concern": "I still want to make sure it is not my heart.",
+    "expectation": "I want advice on what to do next."
+  },
+  "visible_facts": {
+    "chief_complaint": "Left chest pain for three days.",
+    "pain_location": "left anterior chest wall",
+    "pain_duration": "three days",
+    "pain_character": "sore and sharp with movement",
+    "associated_symptoms": []
+  },
+  "hidden_facts": {
+    "symptoms": [
+      "pain reproducible with palpation",
+      "worse with twisting",
+      "no radiation"
+    ],
+    "risk_factors": [
+      "no hypertension",
+      "no diabetes",
+      "non-smoker"
+    ],
+    "medications": [],
+    "recent_self_medication": [
+      "acetaminophen helped slightly"
+    ],
+    "relevant_negatives": [
+      "no shortness of breath",
+      "no sweating",
+      "no syncope",
+      "no hemoptysis"
+    ]
+  },
+  "disclosure_policy": {
+    "default_mode": "vague_first",
+    "reveal_on_specific_ask": {
+      "symptoms": [
+        "pain reproducible with palpation",
+        "worse with twisting"
+      ],
+      "risk_factors": [
+        "no hypertension",
+        "no diabetes",
+        "non-smoker"
+      ],
+      "relevant_negatives": [
+        "no shortness of breath",
+        "no sweating",
+        "no syncope"
+      ]
+    }
+  },
+  "persona_style": {
+    "tone": "calm",
+    "verbosity": "short",
+    "health_literacy": "medium"
+  }
+}
