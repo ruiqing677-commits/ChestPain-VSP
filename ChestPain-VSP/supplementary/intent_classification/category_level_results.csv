@@ -1,0 +1,10 @@
+metric_or_intent,precision_percent,recall_percent,f1_percent
+pain_features,85.00,96.00,90.17
+red_flags,96.00,96.00,96.00
+risk_history,98.04,99.00,98.52
+benign_alternative_clues,87.50,70.00,77.78
+evidence_requests,98.04,99.00,98.52
+reasoning_disposition,99.00,90.00,94.29
+other_unclear,99.00,98.00,98.50
+macro_average,94.65,92.57,93.40
+overall_accuracy,92.86,,
