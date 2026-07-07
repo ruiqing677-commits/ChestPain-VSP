@@ -12,10 +12,9 @@ INTENT_CATEGORIES = [
     "pain_features",
     "red_flags",
     "risk_history",
-    "benign_alternative",
-    "evidence_request",
+    "benign_alternative_clues",
+    "evidence_requests",
     "reasoning_disposition",
-    "medications",
     "other_unclear",
 ]
 
@@ -25,11 +24,10 @@ Classify the doctor's latest utterance into exactly one category:
 
 - pain_features: onset, location, duration, character, radiation, severity, aggravating/relieving factors
 - red_flags: dyspnea, sweating, syncope, hemoptysis, neurological deficits, shock, severe tearing pain
-- risk_history: cardiovascular risk factors, past history, family history, lifestyle risks
-- benign_alternative: reflux, musculoskeletal clues, anxiety, pleuritic or positional clues
-- evidence_request: ECG, troponin, D-dimer, imaging, labs, physical exam, vital signs
+- risk_history: cardiovascular risk factors, past history, medication use, family history, lifestyle risks
+- benign_alternative_clues: reflux, musculoskeletal clues, anxiety, pleuritic or positional clues
+- evidence_requests: ECG, troponin, D-dimer, imaging, labs, physical exam, vital signs
 - reasoning_disposition: diagnosis, risk stratification, triage, admission, discharge, treatment plan
-- medications: current drugs, self-medication, allergy, antiplatelet/anticoagulant history
 - other_unclear: greetings, vague statements, or anything not classifiable above
 
 Return strict JSON: {"intent": "...", "rationale": "..."}.
@@ -56,8 +54,6 @@ class ChestPainIntentRecognizer:
     def recognize(self, question: str, history: Optional[List[Dict[str, str]]] = None) -> Dict[str, str]:
         if not self.use_llm:
             intent = infer_intent_from_question(question)
-            if intent == "other":
-                intent = "other_unclear"
             return {"intent": intent, "rationale": "Keyword-based fallback."}
 
         messages = [

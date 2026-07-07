@@ -5,10 +5,10 @@ chest-pain consultation training and evaluation. It provides lightweight modules
 for case-grounded patient simulation, chest-pain intent recognition, deterministic
 case-evidence retrieval, and VPQ-style dialogue quality evaluation.
 
-This anonymous repository contains the public code and de-identified benchmark
-examples for paper review. Full experimental outputs, generated dialogues,
-evaluation results, API keys, and complete private evaluation data are not
-included.
+This anonymous repository contains public code, synthetic de-identified-style
+benchmark examples, and supplementary intent-classification materials for paper
+review. Full experimental outputs, generated dialogues, evaluation JSON files,
+API keys, and complete private evaluation data are not included.
 
 ## Repository Structure
 
@@ -28,16 +28,23 @@ ChestPain-VSP/
 │   ├── evaluation.py
 │   └── utils.py
 │
-└── benchmark/
-    ├── README.md
-    ├── example_cases/
-    │   ├── 001.json
-    │   ├── 002.json
-    │   └── 003.json
-    └── scripts/
-        ├── S1_standard.json
-        ├── S2_disclosure.json
-        └── S3_consistency.json
+├── benchmark/
+│   ├── README.md
+│   ├── example_cases/
+│   │   ├── 001.json
+│   │   ├── 002.json
+│   │   └── 003.json
+│   └── consultation_scripts/
+│       ├── S1_standard.json
+│       ├── S2_disclosure.json
+│       └── S3_consistency.json
+│
+└── supplementary/
+    └── intent_classification/
+        ├── README.md
+        ├── intent_label_definitions.md
+        ├── category_level_results.csv
+        └── intent_examples.md
 ```
 
 ## Highlights
@@ -47,7 +54,7 @@ ChestPain-VSP/
 - Intent-aware evidence retrieval from structured patient cases.
 - VPQ evaluation across eight patient-quality dimensions.
 - OpenAI-compatible API support.
-- De-identified example cases and benchmark scripts.
+- Public example cases, standardized consultation scripts, and intent-classification supplement.
 
 ## Installation
 
@@ -69,38 +76,43 @@ cp .env.example .env
 The `.env` file must never be committed.
 
 ```bash
-CHESTPAIN_VSP_API_KEY=sk-...
+CHESTPAIN_VSP_API_KEY=your_api_key_here
 CHESTPAIN_VSP_BASE_URL=https://api.openai.com/v1
 CHESTPAIN_VSP_MODEL=gpt-4o
 CHESTPAIN_VSP_INTENT_MODEL=gpt-4o-mini
 CHESTPAIN_VSP_JUDGE_MODEL=gpt-4o
 ```
 
-## Quick Example
+## API-based Quick Example
 
 ```python
 from chestpain_vsp import ChestPainVirtualPatient
 from chestpain_vsp.utils import read_json
 
 case_data = read_json("benchmark/example_cases/001.json")
-script = read_json("benchmark/scripts/S1_standard.json")
+script = read_json("benchmark/consultation_scripts/S1_standard.json")
 
 patient = ChestPainVirtualPatient()
 dialogue = patient.run_script(case_data, script["questions"])
 print(dialogue)
 ```
 
-## Benchmark
+## Benchmark Examples
 
 The `benchmark/` directory contains:
 
-- `example_cases/`: small de-identified synthetic chest-pain cases.
-- `scripts/S1_standard.json`: standard chest-pain history-taking script.
-- `scripts/S2_disclosure.json`: controlled-disclosure stress test.
-- `scripts/S3_consistency.json`: conversational consistency stress test.
+- `example_cases/`: small synthetic de-identified-style chest-pain cases.
+- `consultation_scripts/S1_standard.json`: standard chest-pain history-taking script.
+- `consultation_scripts/S2_disclosure.json`: controlled-disclosure stress test.
+- `consultation_scripts/S3_consistency.json`: conversational consistency stress test.
 
-These files are intended to demonstrate the expected data format and allow
-reviewers to run the public code. They are not the full private evaluation set.
+These files document the expected data format and standardized consultation-script format. They are not the full private evaluation set.
+
+## Intent Classification Supplement
+
+The `supplementary/intent_classification/` directory provides category-level
+intent-classification results, label definitions, and representative utterance
+examples corresponding to the supplementary statement in the paper.
 
 ## Evaluation Dimensions
 
@@ -124,7 +136,7 @@ This repository intentionally excludes:
 - generated dialogues
 - evaluation JSON files
 - experiment logs
-- result tables
+- result tables from private evaluation runs
 - API keys or private endpoints
 - complete private evaluation data
 - server paths or local machine metadata
